@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true k8_test npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "travis-ci-docker"
+  env: "Travis-ci-docker-env"
+  bucket_name: "elasticbeanstalk-us-east-2-246002369161"
+  bucket_path: "travis-ci-docker"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
